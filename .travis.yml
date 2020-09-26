@@ -1,0 +1,14 @@
+language: generic
+services:
+  - docker
+git:
+  depth: 1
+before_install:
+  - docker pull curlimages/curl:latest
+env:
+  global:
+    - curl='docker run -it --rm curlimages/curl:latest'
+  jobs:
+    - BEIAN_URI=http://aliyun.haujilo.xyz/
+script:
+  - ./days.sh
