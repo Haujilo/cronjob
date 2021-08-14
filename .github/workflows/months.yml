@@ -1,0 +1,34 @@
+name: 'Monthly work'
+
+defaults:
+  run:
+    shell: bash
+    working-directory: ./
+
+on:
+  schedule:
+    - cron: '0 0 1 * *'
+
+jobs:
+  Renew-Cert:
+    runs-on: ubuntu-latest
+    env:
+      RENEW_BEFORE_DAYS: 32
+      EMAIL: ${{ secrets.EMAIL }}
+      DOMAIN: ${{ secrets.DOMAIN }}
+      DP_Id: ${{ secrets.DP_Id }}
+      DP_Key: ${{ secrets.DP_Key }}
+      ARCHIVE_FILE_PASS: ${{ secrets.ARCHIVE_FILE_PASS }}
+      JIANGUOYUN_USER: ${{ secrets.JIANGUOYUN_USER }}
+      JIANGUOYUN_KEY: ${{ secrets.JIANGUOYUN_KEY }}
+      JIANGUOYUN_URI: ${{ secrets.JIANGUOYUN_URI }}
+      TENCENT_SECRET_ID: ${{ secrets.TENCENT_SECRET_ID }}
+      TENCENT_SECRET_KEY: ${{ secrets.TENCENT_SECRET_KEY }}
+      NETLIFY_API_TOKEN: ${{ secrets.NETLIFY_API_TOKEN }}
+    steps:
+      - name: Install Dependencies
+        run: sudo apt-get --yes install curl openssl python3
+      - name: Checkout
+        uses: actions/checkout@master
+      - name: 'Renew cert'
+        run: cd ./jobs/renew_cert/ && ./run.sh

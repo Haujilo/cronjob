@@ -1,4 +1,4 @@
-name: 'Self Cronjob'
+name: 'Daily work'
 
 defaults:
   run:
@@ -6,17 +6,16 @@ defaults:
     working-directory: ./
 
 on:
-  push:
   schedule:
     - cron: '25 6 * * *'
 
 jobs:
-  days:
+  Keep-Beian-Alive:
     runs-on: ubuntu-latest
     env:
       BEIAN_URI: http://aliyun.haujilo.xyz/
     steps:
       - name: Checkout
         uses: actions/checkout@master
-      - name: 'Keep Beian alive'
-        run: bash ./days.sh
+      - name: 'Keep beian alive'
+        run: cd jobs && ./keep_beian_alive.sh
