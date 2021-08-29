@@ -23,7 +23,7 @@ if [ $FORCE_RENEW_CERT ] || [ `date +%s` -ge `date -d "$CERT_EXPIRE_DATE $RENEW_
 
   # renew cert files
   $ACME_INSTALL_DIR/acme.sh --register-account -m $EMAIL --set-default-ca --server zerossl
-  $ACME_INSTALL_DIR/acme.sh --issue --dns dns_dp -d $DOMAIN -d "*.$DOMAIN" -d "*.nas.$DOMAIN"
+  $ACME_INSTALL_DIR/acme.sh --issue --dns dns_dp -d $DOMAIN -d "vpn.$DOMAIN" -d "*.$DOMAIN" -d "*.nas.$DOMAIN"
 
   # package cert files
   DIR=$DOMAIN.`date +%Y%m%d`

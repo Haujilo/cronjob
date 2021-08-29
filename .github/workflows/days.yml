@@ -6,6 +6,7 @@ defaults:
     working-directory: ./
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '25 6 * * *'
 
