@@ -28,7 +28,7 @@ if [ $FORCE_RENEW_CERT ] || [ `date +%s` -ge `date -d "$CERT_EXPIRE_DATE $RENEW_
   # package cert files
   DIR=$DOMAIN.`date +%Y%m%d`
   mkdir -p $DIR
-  cp -r $ACME_INSTALL_DIR/$DOMAIN/* $DIR/
+  $ACME_INSTALL_DIR/acme.sh --install-cert -d $DOMAIN --cert-file "$DIR/$DOMAIN.pem" --key-file "$DIR/$DOMAIN.key" --fullchain-file "$DIR/fullchain.cer" --reloadcmd "ls -l $PWD/$DIR"
   ARCHIVE_FILE=$DOMAIN.zip
   zip -rj -P $ARCHIVE_FILE_PASS $ARCHIVE_FILE $DIR
 
