@@ -15,6 +15,8 @@ CERT_EXPIRE_DATE=`curl --connect-timeout $TIMEOUT -I -s -v https://www.$DOMAIN/ 
 
 echo "$DOMAIN certificate expire at $CERT_EXPIRE_DATE"
 
+export FORCE_RENEW_CERT=1 
+
 if [ $FORCE_RENEW_CERT ] || [ `date +%s` -ge `date -d "$CERT_EXPIRE_DATE $RENEW_BEFORE_DAYS days ago" +%s` ]; then
   # install acme.sh
   git clone https://github.com/acmesh-official/acme.sh.git
